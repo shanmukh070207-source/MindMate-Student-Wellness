@@ -11,35 +11,13 @@ MindMate is designed to help students organize their academic responsibilities, 
 > **Machine Learning:** Scikit-learn
 
 ---
+## Live Demo
 
-## Deployment
-
-The application can be configured for hosting on a compatible Python web hosting platform.
-
-For Render deployment, review the official Flask deployment documentation:
-
-https://render.com/docs/deploy-flask
-
-Before deployment, verify that:
-
-1. All dependencies are listed in `requirements.txt`.
-2. The application starts using the correct WSGI entry point.
-3. The required machine learning model files are present.
-4. Environment variables are configured securely.
-5. The database is configured appropriately for the hosting environment.
-6. Registration, login, and core features work on the hosted website.
-
-**Live Demo:** Add the actual deployed application URL here after successful deployment.
-
----
-
-## Author and Repository
-
-**Project:** MindMate – Student Mental Wellness Companion
+**Live Application:** https://mindmate-student-wellness.onrender.com/
 
 **GitHub Repository:**
 
-https://github.com/shanmukh070207-source/MindMate-Student-Wellness
+**Source Code:** https://github.com/shanmukh070207-source/MindMate-Student-Wellness
 
 This project was developed as an academic software project to explore web application development, database integration, machine learning, data visualization, and student-focused wellness tools.
 
@@ -204,26 +182,6 @@ User-specific records are associated with the relevant account so that the appli
 | Joblib       | Saving and loading the trained ML pipeline |
 | Pytest       | Automated testing, where configured        |
 
-### Why Flask?
-
-Flask provides a lightweight way to build a Python web application with routing, request handling, templates, and database integration.
-
-Its modular structure makes it suitable for a student project that combines several related features.
-
-### Why SQLite?
-
-SQLite provides a straightforward relational database that can be used without setting up a separate database server.
-
-It is suitable for local development and demonstrations, although a different storage configuration may be preferable for a deployed application with persistent user data.
-
-### Why Scikit-learn?
-
-Scikit-learn provides the tools required to train and use the text classification pipeline that supports the chatbot.
-
-It also allows the trained pipeline to be saved and loaded for use by the Flask application.
-
----
-
 ## Machine Learning Approach
 
 The chatbot uses a traditional machine learning classification approach rather than a generative language model.
@@ -344,98 +302,6 @@ The names and contents of individual modules may differ slightly depending on th
 
 ---
 
-## Installation and Setup
-
-Follow these instructions to run MindMate on your local computer.
-
-### Prerequisites
-
-Install the following:
-
-* Python 3.10 or a compatible version supported by the project dependencies.
-* Git, if you want to clone the repository.
-* A terminal or command prompt.
-* A modern web browser.
-
-### Step 1: Clone the repository
-
-```bash
-git clone https://github.com/shanmukh070207-source/MindMate-Student-Wellness.git
-```
-
-Move into the project directory:
-
-```bash
-cd MindMate-Student-Wellness
-```
-
-### Step 2: Create a virtual environment
-
-On Windows:
-
-```bash
-python -m venv .venv
-```
-
-Activate it:
-
-```bash
-.venv\Scripts\activate
-```
-
-On Linux or macOS:
-
-```bash
-python3 -m venv .venv
-```
-
-Activate it:
-
-```bash
-source .venv/bin/activate
-```
-
-### Step 3: Install dependencies
-
-```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-For development and testing dependencies, if required:
-
-```bash
-pip install -r requirements-dev.txt
-```
-
-### Step 4: Configure environment variables
-
-Review `.env.example` for the supported configuration options.
-
-Set a strong secret key using the environment configuration expected by the application. Do not commit real credentials or secret values to GitHub.
-
-### Step 5: Check the machine learning model
-
-Verify that the model file expected by the application exists in `ml/model/`.
-
-If the model has not been generated, follow the training instructions below.
-
-### Step 6: Start the application
-
-Run:
-
-```bash
-python app.py
-```
-
-Open the local address printed by Flask in your browser. The default development address is usually:
-
-```text
-http://127.0.0.1:5000
-```
-
----
-
 ## Training the Machine Learning Model
 
 If you need to generate or retrain the chatbot classifier, activate your virtual environment and run:
@@ -449,22 +315,6 @@ The script should train the configured text classification pipeline and save the
 Check the training output and generated model files before starting the application.
 
 Training results depend on the dataset and evaluation method used by the current implementation.
-
----
-
-## Testing
-
-The project includes a `tests/` directory for automated tests.
-
-To run the tests, install the development dependencies and execute:
-
-```bash
-python -m pytest
-```
-
-Review the test output to determine whether all tests pass.
-
-If the project does not currently include Pytest in its development requirements, install it separately before running the command.
 
 ---
 

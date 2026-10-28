@@ -176,39 +176,6 @@ User-specific records are associated with the relevant account so that the appli
 
 ---
 
-## Screenshots
-
-Screenshots of the actual running application will be added here.
-
-Create a folder named `docs/screenshots/` in the repository and place the corresponding screenshots inside it.
-
-### Dashboard
-
-![MindMate Dashboard](docs/screenshots/dashboard.png)
-
-### Study Planner
-
-![MindMate Study Planner](docs/screenshots/study-planner.png)
-
-### Mood Tracker
-
-![MindMate Mood Tracker](docs/screenshots/mood-tracker.png)
-
-### Supportive Chatbot
-
-![MindMate Chatbot](docs/screenshots/chat.png)
-
-### Personal Journal
-
-![MindMate Journal](docs/screenshots/journal.png)
-
-### Wellness Activities
-
-![MindMate Wellness Activities](docs/screenshots/activities.png)
-
-> These image references will display the screenshots after the corresponding files have been uploaded to the repository. Capture screenshots from the actual application and use the exact filenames shown above.
-
----
 
 ## Technology Stack
 

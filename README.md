@@ -12,26 +12,36 @@ MindMate is designed to help students organize their academic responsibilities, 
 
 ---
 
-## Table of Contents
+## Deployment
 
-* [Overview](#overview)
-* [Problem Statement](#problem-statement)
-* [Objectives](#objectives)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Technology Stack](#technology-stack)
-* [Machine Learning Approach](#machine-learning-approach)
-* [System Architecture](#system-architecture)
-* [Project Structure](#project-structure)
-* [Installation and Setup](#installation-and-setup)
-* [Running the Application](#running-the-application)
-* [Training the Machine Learning Model](#training-the-machine-learning-model)
-* [Testing](#testing)
-* [Security and Privacy](#security-and-privacy)
-* [Limitations](#limitations)
-* [Future Enhancements](#future-enhancements)
-* [Deployment](#deployment)
-* [Author and Repository](#author-and-repository)
+The application can be configured for hosting on a compatible Python web hosting platform.
+
+For Render deployment, review the official Flask deployment documentation:
+
+https://render.com/docs/deploy-flask
+
+Before deployment, verify that:
+
+1. All dependencies are listed in `requirements.txt`.
+2. The application starts using the correct WSGI entry point.
+3. The required machine learning model files are present.
+4. Environment variables are configured securely.
+5. The database is configured appropriately for the hosting environment.
+6. Registration, login, and core features work on the hosted website.
+
+**Live Demo:** Add the actual deployed application URL here after successful deployment.
+
+---
+
+## Author and Repository
+
+**Project:** MindMate – Student Mental Wellness Companion
+
+**GitHub Repository:**
+
+https://github.com/shanmukh070207-source/MindMate-Student-Wellness
+
+This project was developed as an academic software project to explore web application development, database integration, machine learning, data visualization, and student-focused wellness tools.
 
 ---
 
@@ -506,39 +516,6 @@ Possible improvements include:
 * Stronger privacy controls and production deployment safeguards.
 
 These are potential future improvements and should not be interpreted as features already implemented.
-
----
-
-## Deployment
-
-The application can be configured for hosting on a compatible Python web hosting platform.
-
-For Render deployment, review the official Flask deployment documentation:
-
-https://render.com/docs/deploy-flask
-
-Before deployment, verify that:
-
-1. All dependencies are listed in `requirements.txt`.
-2. The application starts using the correct WSGI entry point.
-3. The required machine learning model files are present.
-4. Environment variables are configured securely.
-5. The database is configured appropriately for the hosting environment.
-6. Registration, login, and core features work on the hosted website.
-
-**Live Demo:** Add the actual deployed application URL here after successful deployment.
-
----
-
-## Author and Repository
-
-**Project:** MindMate – Student Mental Wellness Companion
-
-**GitHub Repository:**
-
-https://github.com/shanmukh070207-source/MindMate-Student-Wellness
-
-This project was developed as an academic software project to explore web application development, database integration, machine learning, data visualization, and student-focused wellness tools.
 
 ---
 

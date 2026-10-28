@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Safety information{% endblock %}
+{% block content %}
+<h1>Safety information</h1>
+<section class="card">
+  <p>MindMate is a simple wellness tool. It is <strong>not</strong> an emergency service, it does not monitor you,
+    and it cannot promise to notice every message that signals a crisis.</p>
+  <h2>If you might be in danger</h2>
+  <p>Please contact your local emergency services right away, or reach out to someone near you: a friend, family member,
+    hostel warden or college counsellor.</p>
+  <ul class="item-list">
+    {% for c in contacts %}
+      <li><span><strong>{{ c.name }}</strong><br>{{ c.detail }}</span>
+        {% if c.url %}<a href="{{ c.url }}" rel="noopener noreferrer" target="_blank">Website</a>{% endif %}</li>
+    {% endfor %}
+  </ul>
+  <p class="muted">These contacts are for India and were checked in October 2026. If you are in another country, please use your local emergency number or crisis line.</p>
+  <h2>How the chat handles difficult messages</h2>
+  <p>Before the chat tries to work out a topic, a separate, simple check looks for certain phrases that may suggest
+    someone is in danger. If one is found, MindMate shows a support message instead of a normal reply.
+    This check is deliberately cautious and can be wrong in both directions.</p>
+  <p>MindMate's topic guesses are approximate and are never a diagnosis or a psychological assessment.</p>
+</section>
+{% endblock %}

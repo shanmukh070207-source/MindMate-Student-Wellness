@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Study planner{% endblock %}
+{% block content %}
+<h1>Study planner</h1>
+
+<section class="card">
+  <h2>Add a task</h2>
+  <form method="post" action="{{ url_for('planner.add_task') }}" class="form-grid">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <div class="field">
+      <label for="title">Title <span class="req">(required)</span></label>
+      <input id="title" name="title" type="text" maxlength="100" required>
+    </div>
+    <div class="field">
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" maxlength="50" placeholder="e.g. Physics">
+    </div>
+    <div class="field">
+      <label for="due_date">Due date <span class="req">(required)</span></label>
+      <input id="due_date" name="due_date" type="date" required>
+    </div>
+    <div class="field field-wide">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="2" maxlength="500"></textarea>
+    </div>
+    <div class="field-wide"><button class="btn" type="submit">Add task</button></div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="toolbar">
+    <nav class="tabs" aria-label="Filter tasks">
+      {% for v, label in [('all','All'),('upcoming','Upcoming'),('overdue','Overdue'),('completed','Completed')] %}
+        <a href="{{ url_for('planner.planner', view=v, order=order) }}" {% if view == v %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <a class="btn btn-small btn-ghost" href="{{ url_for('planner.planner', view=view, order='desc' if order == 'asc' else 'asc') }}">
+      Sort by due date: {{ 'earliest first' if order == 'asc' else 'latest first' }} (switch)</a>
+  </div>
+
+  {% if tasks %}
+    <ul class="task-list">
+      {% for t in tasks %}
+        {% set overdue = t.status == 'pending' and t.due_date < today %}
+        <li class="task {% if t.status == 'completed' %}task-done{% endif %}">
+          <div class="task-main">
+            <strong>{{ t.title }}</strong>
+            {% if t.subject %}<span class="badge">{{ t.subject }}</span>{% endif %}
+            {% if t.status == 'completed' %}<span class="badge badge-ok">Completed</span>
+            {% elif overdue %}<span class="badge badge-danger">Overdue</span>
+            {% elif t.due_date == today %}<span class="badge badge-warn">Due today</span>{% endif %}
+            <div class="muted">Due {{ t.due_date }}</div>
+            {% if t.description %}<p>{{ t.description }}</p>{% endif %}
+          </div>
+          <div class="task-actions">
+            <form method="post" action="{{ url_for('planner.toggle_task', task_id=t.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button class="btn btn-small" type="submit">{{ 'Mark pending' if t.status == 'completed' else 'Mark completed' }}</button>
+            </form>
+            <a class="btn btn-small btn-secondary" href="{{ url_for('planner.edit_task', task_id=t.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('planner.delete_task', task_id=t.id) }}" data-confirm="Delete this task? This cannot be undone.">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button class="btn btn-small btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">
+      {% if view == 'all' %}No tasks yet. Add your first task above.
+      {% elif view == 'completed' %}No completed tasks yet.
+      {% elif view == 'overdue' %}Nothing is overdue. Nice work!
+      {% else %}No upcoming tasks right now.{% endif %}
+    </p>
+  {% endif %}
+</section>
+{% endblock %}

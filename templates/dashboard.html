@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Hello, {{ current_username }} 👋</h1>
+<p class="lead">Here's a quick look at your recent activity. Everything below comes from what you have recorded yourself.</p>
+
+<section class="grid grid-4" aria-label="Summary">
+  <article class="card stat"><span class="stat-number">{{ counts.mood_count }}</span><span class="stat-label">Mood entries</span></article>
+  <article class="card stat"><span class="stat-number">{{ counts.pending }}</span><span class="stat-label">Pending tasks</span></article>
+  <article class="card stat"><span class="stat-number">{{ counts.completed }}</span><span class="stat-label">Completed tasks</span></article>
+  <article class="card stat"><span class="stat-number">{{ counts.overdue }}</span><span class="stat-label">Overdue tasks</span></article>
+</section>
+
+<section class="grid grid-2">
+  <article class="card">
+    <h2>Upcoming deadlines</h2>
+    {% if upcoming %}
+      <ul class="item-list">
+        {% for t in upcoming %}
+          <li>
+            <span><strong>{{ t.title }}</strong>{% if t.subject %} <span class="muted">· {{ t.subject }}</span>{% endif %}</span>
+            <span class="badge {% if t.due_date < today %}badge-danger{% elif t.due_date == today %}badge-warn{% endif %}">
+              {% if t.due_date < today %}Overdue · {% endif %}{{ t.due_date }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      <a href="{{ url_for('planner.planner') }}">Open the study planner</a>
+    {% else %}
+      <p class="empty">No pending tasks. Add one in the <a href="{{ url_for('planner.planner') }}">study planner</a> to see deadlines here.</p>
+    {% endif %}
+  </article>
+
+  <article class="card">
+    <h2>Recent moods</h2>
+    {% if recent_moods %}
+      <ul class="item-list">
+        {% for m in recent_moods %}
+          <li><span>{{ m.mood }}</span><span class="muted">{{ m.created_at[:16] }}</span></li>
+        {% endfor %}
+      </ul>
+      <a href="{{ url_for('mood.mood_tracker') }}">See full mood history</a>
+    {% else %}
+      <p class="empty">No moods recorded yet. <a href="{{ url_for('mood.mood_tracker') }}">Record how you feel today.</a></p>
+    {% endif %}
+  </article>
+</section>
+
+<section class="card">
+  <h2>Mood trend</h2>
+  {% if show_mood_charts %}
+    <img class="chart" src="{{ url_for('main.chart_image', kind='mood_trend') }}"
+         alt="Line chart of your recorded moods over time" loading="lazy">
+  {% else %}
+    <p class="empty">Your mood chart will appear here after you record a mood.</p>
+  {% endif %}
+</section>
+
+<section class="grid grid-2">
+  <article class="card">
+    <h2>Mood summary</h2>
+    {% if show_mood_charts %}
+      <img class="chart" src="{{ url_for('main.chart_image', kind='mood_dist') }}"
+           alt="Bar chart showing how many times each mood was recorded" loading="lazy">
+    {% else %}<p class="empty">No mood data yet.</p>{% endif %}
+  </article>
+  <article class="card">
+    <h2>Task overview</h2>
+    {% if show_task_chart %}
+      <img class="chart" src="{{ url_for('main.chart_image', kind='tasks') }}"
+           alt="Bar chart of completed, pending and overdue tasks" loading="lazy">
+    {% else %}<p class="empty">No tasks yet.</p>{% endif %}
+  </article>
+</section>
+
+<section class="card">
+  <h2>Activity overview</h2>
+  <p>You have {{ counts.mood_count }} mood {{ 'entry' if counts.mood_count == 1 else 'entries' }},
+     {{ counts.pending + counts.completed }} study {{ 'task' if (counts.pending + counts.completed) == 1 else 'tasks' }}
+     and {{ counts.journal_count }} private journal {{ 'entry' if counts.journal_count == 1 else 'entries' }}.</p>
+</section>
+
+<section class="grid grid-2">
+  <article class="card card-soft">
+    <h2>Need to talk something through?</h2>
+    <p>The supportive chat can suggest practical next steps for everyday student stress.</p>
+    <a class="btn" href="{{ url_for('chat.chat') }}">Open the chat</a>
+  </article>
+  <article class="card card-soft">
+    <h2>Take a short break</h2>
+    <p>Try a breathing exercise or a grounding activity. They're optional and may not suit everyone.</p>
+    <a class="btn btn-secondary" href="{{ url_for('activities.activities') }}">Stress-relief activities</a>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Mood tracker{% endblock %}
+{% block content %}
+<h1>Mood tracker</h1>
+<p class="lead">A quick way to check in with yourself. These options are for personal reflection only, not a medical or clinical measure.</p>
+
+<section class="card">
+  <h2>How are you feeling?</h2>
+  <form method="post" action="{{ url_for('mood.add_mood') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <fieldset class="mood-options">
+      <legend>Choose a mood</legend>
+      {% for m in moods %}
+        <label class="mood-option">
+          <input type="radio" name="mood" value="{{ m }}" required>
+          <span>{{ m }}</span>
+        </label>
+      {% endfor %}
+    </fieldset>
+    <div class="field">
+      <label for="note">Optional note</label>
+      <textarea id="note" name="note" rows="2" maxlength="500" placeholder="Anything you'd like to remember about today"></textarea>
+    </div>
+    <button class="btn" type="submit">Save mood</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Your history</h2>
+  {% if entries %}
+    <ul class="item-list">
+      {% for e in entries %}
+        <li>
+          <div>
+            <strong>{{ e.mood }}</strong> <span class="muted">· {{ e.created_at[:16] }}</span>
+            {% if e.note %}<p class="note">{{ e.note }}</p>{% endif %}
+          </div>
+          <form method="post" action="{{ url_for('mood.delete_mood', entry_id=e.id) }}" data-confirm="Delete this mood entry?">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="btn btn-small btn-danger" type="submit">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No mood entries yet. Pick a mood above to save your first one.</p>
+  {% endif %}
+</section>
+{% endblock %}

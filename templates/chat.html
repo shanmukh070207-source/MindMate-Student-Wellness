@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Supportive chat{% endblock %}
+{% block content %}
+<h1>Supportive chat</h1>
+<p class="lead">Tell me what's on your mind about studies or student life. Your messages are not saved and are not sent anywhere outside this app.</p>
+
+<aside class="notice" role="note">
+  <strong>Please remember:</strong> {{ disclaimer }} MindMate cannot monitor you or guarantee it will notice every difficult message.
+  If you feel unsafe or in danger, contact a trusted person or your local emergency services.
+  <a href="{{ url_for('chat.safety_info') }}">Read the safety information</a>.
+</aside>
+
+{% if model_error %}
+  <div class="flash flash-error" role="alert">
+    <strong>Chat is not available yet.</strong> {{ model_error }}
+  </div>
+{% else %}
+  <section class="chat-box card" aria-label="Chat conversation">
+    <div id="chat-log" class="chat-log" role="log" aria-live="polite">
+      <div class="msg msg-bot"><span class="msg-who">MindMate</span>
+        <p>Hi! What's been on your mind lately? For example: exams, deadlines, focus or motivation.</p></div>
+    </div>
+    <p id="chat-status" class="muted" aria-live="polite"></p>
+    <form id="chat-form" class="chat-form" novalidate>
+      <label for="chat-input" class="sr-only">Your message</label>
+      <textarea id="chat-input" rows="2" maxlength="1000" placeholder="Type your message here..." required></textarea>
+      <button class="btn" id="chat-send" type="submit">Send</button>
+    </form>
+    <p class="muted small">Press Enter to send, Shift+Enter for a new line.</p>
+  </section>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+{% if not model_error %}
+<script>window.MINDMATE = { chatUrl: "{{ url_for('chat.chat_message') }}", csrf: "{{ csrf_token }}" };</script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endif %}
+{% endblock %}

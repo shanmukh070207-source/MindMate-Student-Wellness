@@ -1,0 +1,67 @@
+{
+  "data_file": "demo_dataset.csv",
+  "rows_total": 1395,
+  "rows_train": 1050,
+  "rows_test": 345,
+  "accuracy": 0.6522,
+  "threshold": 0.4,
+  "precision_above_threshold": 0.8817204301075269,
+  "coverage_above_threshold": 0.5391304347826087,
+  "per_class": {
+    "Academic Stress": {
+      "precision": 0.415,
+      "recall": 0.85,
+      "f1-score": 0.557,
+      "support": 40.0
+    },
+    "Concentration Difficulties": {
+      "precision": 0.716,
+      "recall": 0.955,
+      "f1-score": 0.818,
+      "support": 66.0
+    },
+    "Exam Anxiety": {
+      "precision": 0.855,
+      "recall": 0.615,
+      "f1-score": 0.715,
+      "support": 96.0
+    },
+    "General Emotional Stress": {
+      "precision": 0.341,
+      "recall": 0.6,
+      "f1-score": 0.435,
+      "support": 25.0
+    },
+    "General or Unclassified Concern": {
+      "precision": 0.75,
+      "recall": 0.2,
+      "f1-score": 0.316,
+      "support": 30.0
+    },
+    "Low Motivation": {
+      "precision": 0.8,
+      "recall": 0.545,
+      "f1-score": 0.649,
+      "support": 44.0
+    },
+    "Time Management": {
+      "precision": 1.0,
+      "recall": 0.545,
+      "f1-score": 0.706,
+      "support": 44.0
+    },
+    "macro avg": {
+      "precision": 0.697,
+      "recall": 0.616,
+      "f1-score": 0.599,
+      "support": 345.0
+    },
+    "weighted avg": {
+      "precision": 0.742,
+      "recall": 0.652,
+      "f1-score": 0.652,
+      "support": 345.0
+    }
+  },
+  "note": "Measured on a held-out split of the supplied dataset only. If the demonstration dataset was used, these numbers are not meaningful for real student messages."
+}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Journal{% endblock %}
+{% block content %}
+<h1>Private journal</h1>
+<p class="lead">Write whatever you like. Entries are visible only to your account and you can delete them whenever you want.
+  Local storage can't guarantee complete privacy, so avoid writing anything you'd be uncomfortable with others seeing if they had access to this computer.</p>
+
+<section class="card">
+  <form method="post" action="{{ url_for('activities.add_journal') }}" id="journal-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <div class="field">
+      <label for="entry_text">New entry</label>
+      <textarea id="entry_text" name="entry_text" rows="6" maxlength="{{ max_length }}" required></textarea>
+      <small id="journal-count">0 / {{ max_length }}</small>
+    </div>
+    <div class="button-row">
+      <button class="btn" type="submit">Save entry</button>
+      <button class="btn btn-ghost" type="button" id="journal-discard">Discard</button>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Your entries</h2>
+  {% if entries %}
+    <ul class="item-list">
+      {% for e in entries %}
+        <li class="journal-item">
+          <div>
+            <span class="muted">{{ e.created_at[:16] }}</span>
+            <p class="note preline">{{ e.entry_text }}</p>
+          </div>
+          <form method="post" action="{{ url_for('activities.delete_journal', entry_id=e.id) }}" data-confirm="Delete this journal entry?">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="btn btn-small btn-danger" type="submit">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">Your journal is empty. Your saved entries will appear here.</p>
+  {% endif %}
+</section>
+<p><a href="{{ url_for('activities.activities') }}">&larr; Back to activities</a></p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/activities.js') }}"></script>{% endblock %}

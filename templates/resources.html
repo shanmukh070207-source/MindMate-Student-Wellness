@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Wellness resources{% endblock %}
+{% block content %}
+<h1>Wellness resources</h1>
+<p class="lead">General ideas that many students find useful. They are not guaranteed to work for everyone and are not treatment.</p>
+
+<section class="grid grid-2">
+  <article class="card"><h2>Managing study stress</h2>
+    <ul class="plain-list">
+      <li>Break big tasks into small steps and start with the smallest.</li>
+      <li>Study in short blocks (for example 25 minutes) with a break in between.</li>
+      <li>Keep a regular sleep routine and eat regular meals where you can.</li>
+      <li>Try not to compare your progress with other people's.</li>
+      <li>Ask teachers or classmates when you are unsure what matters most.</li>
+    </ul></article>
+  <article class="card"><h2>Breaks and organising work</h2>
+    <ul class="plain-list">
+      <li>Write down deadlines in one place, such as the <a href="{{ url_for('planner.planner') }}">study planner</a>.</li>
+      <li>Move around, drink water or step outside during breaks.</li>
+      <li>Put your phone out of reach while you study.</li>
+      <li>Plan for rest. A realistic plan includes free time.</li>
+    </ul></article>
+  <article class="card"><h2>Talking to people you trust</h2>
+    <ul class="plain-list">
+      <li>A friend, family member, mentor, hostel warden or class teacher can often help.</li>
+      <li>You don't need a perfect explanation. "I've been finding things hard lately" is enough to begin.</li>
+      <li>Many colleges have a counselling cell. Ask your student affairs office.</li>
+    </ul></article>
+  <article class="card"><h2>When to see a professional</h2>
+    <p>Consider contacting a qualified mental health professional or doctor if difficult feelings last for weeks,
+      get in the way of sleep, eating, studying or daily life, or you simply feel you need more support.
+      You don't have to wait until things are "bad enough".</p></article>
+</section>
+
+<section class="card">
+  <h2>Support services</h2>
+  <ul class="item-list">
+    {% for c in contacts %}
+      <li><span><strong>{{ c.name }}</strong><br>{{ c.detail }}</span>
+        {% if c.url %}<a href="{{ c.url }}" rel="noopener noreferrer" target="_blank">Website</a>{% endif %}</li>
+    {% endfor %}
+  </ul>
+  <p class="muted">Listed for students in India and checked in October 2026. Services can change, so please confirm details on the official website. If you are elsewhere, use your local emergency number or crisis line.</p>
+</section>
+
+<section class="card card-soft">
+  <h2>About MindMate's limits</h2>
+  <ul class="plain-list">
+    <li>MindMate is not medical advice, diagnosis, therapy or treatment.</li>
+    <li>The chat uses a small program that makes an approximate guess about a message's topic. It can be wrong and does not understand feelings.</li>
+    <li>It cannot monitor you or guarantee that it will notice every message that signals a crisis.</li>
+    <li>It is not a replacement for friends, family, counsellors or doctors.</li>
+  </ul>
+  <a href="{{ url_for('chat.safety_info') }}">Safety information</a>
+</section>
+{% endblock %}

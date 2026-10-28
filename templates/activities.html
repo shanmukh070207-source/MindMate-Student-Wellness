@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Stress-relief activities{% endblock %}
+{% block content %}
+<h1>Stress-relief activities</h1>
+<p class="lead">Small, optional activities for study breaks. They may help some people and not others, and you can stop whenever you like.</p>
+
+<section class="card" aria-labelledby="breathing-title">
+  <h2 id="breathing-title">Guided breathing</h2>
+  <p>Breathe in as the circle grows, hold, then breathe out as it shrinks. You can pause or reset at any time.</p>
+  <div class="breath-wrap">
+    <div id="breath-circle" class="breath-circle" aria-hidden="true"></div>
+  </div>
+  <p id="breath-text" class="breath-text" role="status" aria-live="polite">Press Start when you're ready.</p>
+  <p id="breath-count" class="muted center">Rounds completed: 0</p>
+  <div class="button-row center">
+    <button class="btn" id="breath-start" type="button">Start</button>
+    <button class="btn btn-secondary" id="breath-pause" type="button" disabled>Pause</button>
+    <button class="btn btn-ghost" id="breath-reset" type="button">Reset</button>
+  </div>
+</section>
+
+<section class="card" aria-labelledby="grounding-title">
+  <h2 id="grounding-title">Five-senses grounding</h2>
+  <p>Move through the steps at your own pace. Take as long as you like on each one.</p>
+  <div class="grounding-step" id="grounding-step" role="status" aria-live="polite">
+    <p class="grounding-count" id="grounding-label">Step 1 of 5</p>
+    <p class="grounding-text" id="grounding-text">Look around and notice <strong>5 things you can see</strong>.</p>
+  </div>
+  <div class="button-row">
+    <button class="btn btn-secondary" id="grounding-back" type="button" disabled>Back</button>
+    <button class="btn" id="grounding-next" type="button">Next</button>
+    <button class="btn btn-ghost" id="grounding-restart" type="button">Start over</button>
+  </div>
+</section>
+
+<section class="card card-soft">
+  <h2>Journaling</h2>
+  <p>Write down your thoughts in a private journal. Entries are saved only to your account, you can delete them at any time,
+    and they are never used to train the chat model.</p>
+  <a class="btn" href="{{ url_for('activities.journaling') }}">Open my journal</a>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/activities.js') }}"></script>{% endblock %}

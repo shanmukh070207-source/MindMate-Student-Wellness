@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Edit task{% endblock %}
+{% block content %}
+<h1>Edit task</h1>
+<section class="card">
+  <form method="post" action="{{ url_for('planner.edit_task', task_id=task['id']) }}" class="form-grid">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <div class="field">
+      <label for="title">Title <span class="req">(required)</span></label>
+      <input id="title" name="title" type="text" maxlength="100" required value="{{ task['title'] }}">
+    </div>
+    <div class="field">
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" maxlength="50" value="{{ task['subject'] }}">
+    </div>
+    <div class="field">
+      <label for="due_date">Due date <span class="req">(required)</span></label>
+      <input id="due_date" name="due_date" type="date" required value="{{ task['due_date'] }}">
+    </div>
+    <div class="field field-wide">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3" maxlength="500">{{ task['description'] }}</textarea>
+    </div>
+    <div class="field-wide button-row">
+      <button class="btn" type="submit">Save changes</button>
+      <a class="btn btn-ghost" href="{{ url_for('planner.planner') }}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

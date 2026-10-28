@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Private / generated data - never commit these
+instance/*
+!instance/.gitkeep
+*.sqlite3
+*.db
+.env
+ml/model/*.tmp
+ml/model/*.bak
+
+# Real (non-demo) datasets may be licensed or private
+data/*.csv
+!data/demo_dataset.csv
+.DS_Store
+
+# Local configuration and Python build artefacts
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]

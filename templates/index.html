@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>MindMate</h1>
+  <p class="tagline">A little support for your everyday student life.</p>
+  <p class="lead">MindMate is a private place to talk through everyday college stress, organise your studies,
+    keep track of how you feel, and take small breaks that may help you reset.</p>
+  <div class="button-row">
+    {% if current_username %}
+      <a class="btn" href="{{ url_for('main.dashboard') }}">Open my dashboard</a>
+      <a class="btn btn-secondary" href="{{ url_for('chat.chat') }}">Start chatting</a>
+    {% else %}
+      <a class="btn" href="{{ url_for('auth.register') }}">Get started</a>
+      <a class="btn btn-secondary" href="{{ url_for('auth.login') }}">Log in</a>
+    {% endif %}
+  </div>
+</section>
+
+<section aria-labelledby="features-title">
+  <h2 id="features-title">What you can do here</h2>
+  <div class="grid grid-3">
+    <article class="card"><h3>Supportive chat</h3>
+      <p>Describe what's on your mind. A small program on this computer makes an approximate guess about the topic
+        (like exams or time management) and replies with a practical suggestion.</p></article>
+    <article class="card"><h3>Study planner</h3>
+      <p>Add tasks and deadlines, see what is overdue, and tick things off as you go.</p></article>
+    <article class="card"><h3>Mood tracker</h3>
+      <p>Note how you feel each day and look back at your own patterns. It's for reflection only.</p></article>
+    <article class="card"><h3>Stress-relief activities</h3>
+      <p>Guided breathing, a five-senses grounding exercise and private journaling. They are optional and may not work for everyone.</p></article>
+    <article class="card"><h3>Your dashboard</h3>
+      <p>Simple charts built from your own entries, so you can see your mood and tasks at a glance.</p></article>
+    <article class="card"><h3>Wellness resources</h3>
+      <p>Study tips and information on when and how to reach a trained professional.</p></article>
+  </div>
+</section>
+
+<section class="grid grid-2">
+  <article class="card card-soft">
+    <h2>Privacy note</h2>
+    <ul class="plain-list">
+      <li>Your chat messages are <strong>not saved</strong> and are never sent to an outside AI service.</li>
+      <li>Tasks, moods and journal entries are saved in a database on the computer running MindMate and are visible only to your account.</li>
+      <li>Nothing is shared with colleges or third parties, and your entries are never used to train the chat model.</li>
+      <li>Local storage is not a guarantee of complete security. Don't write anything here that you wouldn't want someone with access to this computer to see.</li>
+    </ul>
+  </article>
+  <article class="card card-soft">
+    <h2>Please note</h2>
+    <p>MindMate is not a substitute for professional support. It does not diagnose or treat any condition,
+      and it cannot monitor you or guarantee that it will notice every difficult message.</p>
+    <p>If you are struggling, please talk to someone you trust or a qualified professional. See the
+      <a href="{{ url_for('resources.resources') }}">resources page</a>.</p>
+  </article>
+</section>
+{% endblock %}
